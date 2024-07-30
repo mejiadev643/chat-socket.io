@@ -30,14 +30,14 @@ exports.login = async (req, res) => {
   }
 };
 exports.isAlive = (req, res) => {
-  const token = req.headers['authorization'];
-
+  const authorization = req.headers['authorization'];
+const token = authorization && authorization.split(' ')[1];
   if (!token) {
       return res.status(401).json({ error: 'No token provided' });
   }
   jwt.verify(token, process.env.JWT_SECRET, (error, decoded) => {
     if (error) {
-        return res.status(401).json({ error: 'Invalid token' });
+        return res.status(401).json({ error: 'Invalid token', message: error.message });
     }
     res.status(200).json({ message: 'Token is valid' });
 });
