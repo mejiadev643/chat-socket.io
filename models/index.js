@@ -1,4 +1,5 @@
 const { Sequelize } = require('sequelize');
+const DataTypes = Sequelize.DataTypes;
 const config = require('../config/config.js');
 
 const sequelize = new Sequelize(
@@ -13,7 +14,10 @@ const sequelize = new Sequelize(
 );
 
 const models = {
-  User: require('./user')(sequelize, Sequelize)
+  User: require('./user')(sequelize, DataTypes),
+  Group: require('./group')(sequelize, DataTypes),
+  GroupUser: require('./groupUser')(sequelize, DataTypes),
+  Message: require('./message')(sequelize, DataTypes),
 };
 
 Object.keys(models).forEach(modelName => {

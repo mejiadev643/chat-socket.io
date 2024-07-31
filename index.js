@@ -4,7 +4,7 @@ const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
 const authRoutes = require('./routes/authRoutes');
-const userRoutes = require('./routes/userRoutes');
+const userRoutes = require('./routes/usersRoutes');
 const { sequelize } = require('./models');
 const { handleSocket } = require('./sockets/chatSocket');
 
@@ -29,7 +29,7 @@ app.use('/api/users', userRoutes);
 handleSocket(io);
 
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5100;
 server.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
   try {

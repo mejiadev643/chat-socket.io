@@ -20,8 +20,18 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   }, {
-    timestamps: false
+    timestamps: false,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   });
+
+  User.associate = (models) => {
+    User.belongsToMany(models.Group, {
+      through: 'group_users',
+      foreignKey: 'user_id',
+      otherKey: 'group_id'
+    });
+  };
 
   return User;
 };
