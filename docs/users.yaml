@@ -1,0 +1,69 @@
+openapi: 3.0.0
+info:
+  title: Your API Title
+  version: 1.0.0
+  description: A description of your API
+paths:
+  /api/users/profile:
+    get:
+      summary: Get user profile
+      tags: [Users]
+      responses:
+        200:
+          description: The user profile
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      password:
+                        type: string
+        401:
+          description: Unauthorized
+        500:
+          description: Error
+  /api/users/profileEmail:
+    get:
+      summary: Get user by email
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        200:
+          description: The user description by email
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      username:
+                        type: string
+                      email:
+                        type: string
+                      password:
+                        type: string
+        404:
+          description: User not found
+        500:
+          description: Error fetching user profile
