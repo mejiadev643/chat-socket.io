@@ -19,7 +19,8 @@ CREATE TABLE public.groups (
 CREATE TABLE public.messages (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     group_id UUID REFERENCES groups(id) ON DELETE CASCADE,
-    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    user_send_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    user_receive_id UUID REFERENCES users(id) ON DELETE CASCADE,
     content TEXT NOT NULL,
     createAt TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
@@ -27,7 +28,6 @@ CREATE TABLE public.messages (
 CREATE TABLE public.group_users (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     group_id UUID REFERENCES groups(id) ON DELETE CASCADE,
-    user_send_id UUID REFERENCES users(id) ON DELETE CASCADE,
-    user_receive_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
     createAt TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
