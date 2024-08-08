@@ -15,11 +15,12 @@ exports.getProfile = async (req, res) => {
 };
 
 exports.newMessage = async (req, res) => {
-  const { content, UUID } = req.body;
+  const { content, sender,receiver} = req.body;
   try {
     const message = await Message.create({
       content,
-      user_id: req.userId,
+      user_send_id: sender,
+      user_receive_id: receiver
     });
     res.status(201).json({ message });
 

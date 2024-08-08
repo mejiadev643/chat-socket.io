@@ -5,6 +5,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/usersRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 const { sequelize } = require('./models');
 const { handleSocket } = require('./sockets/chatSocket');
 const swaggerSetup = require('./swagger');
@@ -26,6 +27,7 @@ app.use(express.json());
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/chats', chatRoutes);
 
 // Socket.io
 handleSocket(io);

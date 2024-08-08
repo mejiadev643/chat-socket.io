@@ -13,7 +13,15 @@ module.exports = (sequelize, DataTypes) => {
       },
       onDelete: 'CASCADE'
     },
-    user_id: {
+    user_send_id: {
+      type: DataTypes.UUID,
+      references: {
+        model: 'users',
+        key: 'id'
+      },
+      onDelete: 'CASCADE'
+    },
+    user_receive_id: {
       type: DataTypes.UUID,
       references: {
         model: 'users',
@@ -35,7 +43,11 @@ module.exports = (sequelize, DataTypes) => {
       onDelete: 'CASCADE'
     });
     Message.belongsTo(models.User, {
-      foreignKey: 'user_id',
+      foreignKey: 'user_send_id',
+      onDelete: 'CASCADE'
+    });
+    Message.belongsTo(models.User, {
+      foreignKey: 'user_receive_id',
       onDelete: 'CASCADE'
     });
   };
