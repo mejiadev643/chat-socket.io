@@ -1,4 +1,4 @@
-const { Message } = require('../models');
+const { Message , User  } = require('../models');
 const { Op } = require('sequelize'); // Importar operadores de Sequelize
 const jwt = require('jsonwebtoken');
 
@@ -15,8 +15,9 @@ exports.getChats = async (req, res) => {
                         { user_send_id: userId },
                         { user_receive_id: userId }
                     ],
-                }
-            }
+                },
+                include:[{model: User, as: 'sended'}, {model: User, as: 'received'}]
+            },
         );
         res.json({ messages });
     } catch (error) {
